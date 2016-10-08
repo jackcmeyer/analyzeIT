@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Router, Route, IndexRoute, browserHistory, IndexRedirect} from "react-router";
-import $ from "jquery";
+// import $ from "jquery";
 
 
 import App from "./js/components/App";

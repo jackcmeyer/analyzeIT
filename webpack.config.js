@@ -19,7 +19,7 @@ module.exports = {
         ]
     },
     output: {
-        path: "./src/main/resources/static",
+        path: "./src/main/resources",
         filename: "scripts.min.js"
     },
     plugins: debug ? [] : [
