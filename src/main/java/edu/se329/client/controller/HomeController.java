@@ -40,16 +40,16 @@ public class HomeController {
 
 
         List<Tweet> tweets = twitter.timelineOperations().getUserTimeline("FoxNews", 200);
-
         for(Tweet tweet : tweets) {
             //tweet.
             //System.out.println(tweet.getText());
             //System.out.println();
-            System.out.println("Tweet text: "+tweet.getText());
-            System.out.println("AlchemyTxt: "+alchemyService.getKeywords(tweet));
+            System.out.println("Modified  : "+tweet.getText());
+            //System.out.println("AlchemyTxt: "+alchemyService.getTaxonomy(tweet));
         }
-
-        System.out.println(tweets.size());
+        System.out.println(alchemyService.getTaxonomy(tweets));
+        System.out.println(alchemyService.getSentiment(tweets));
+        System.out.println(alchemyService.getEmotions(tweets));
 
 
         return "index";
