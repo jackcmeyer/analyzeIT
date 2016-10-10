@@ -5,6 +5,8 @@ import javax.inject.Inject;
 import edu.se329.client.model.HashtagModel;
 import edu.se329.client.model.MentionModel;
 import edu.se329.client.model.ReturnableModel;
+import edu.se329.service.DataService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.social.twitter.api.CursoredList;
 import org.springframework.social.twitter.api.Tweet;
@@ -26,16 +28,14 @@ import java.util.regex.Pattern;
 @RequestMapping("/")
 public class HomeController {
 
+    @Autowired
     private Twitter twitter;
 
+    @Autowired
     private ConnectionRepository connectionRepository;
-    private ReturnableModel returnableModel;
 
-    @Inject
-    public HomeController(Twitter twitter, ConnectionRepository connectionRepository) {
-        this.twitter = twitter;
-        this.connectionRepository = connectionRepository;
-    }
+    @Autowired
+    private DataService dataService;
 
     /**
      * Mapping for the home page. This function will load the contents for "/"

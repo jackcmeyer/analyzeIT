@@ -6,7 +6,7 @@ import java.util.Map;
 /**
  * Created by Jack on 10/10/2016.
  */
-public class HashtagModel implements Returnable{
+public class HashtagModel {
 
     Map<String, Integer> hashtagCount;
 

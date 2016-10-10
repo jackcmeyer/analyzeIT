@@ -1,14 +1,18 @@
 package edu.se329.client.model;
 
-/**
- * Created by Jack on 10/10/2016.
- */
 public class ReturnableModel {
 
     private ConceptModel conceptModel;
     private HashtagModel hashtagModel;
     private KeywordModel keywordModel;
     private MentionModel mentionmodel;
+
+    public ReturnableModel() {
+        conceptModel = null;
+        hashtagModel = null;
+        keywordModel = null;
+        mentionmodel = null;
+    }
 
     public ConceptModel getConceptModel() {
         return conceptModel;
@@ -41,10 +45,5 @@ public class ReturnableModel {
     public void setMentionmodel(MentionModel mentionmodel) {
         this.mentionmodel = mentionmodel;
     }
-
-    public ReturnableModel() {
-
-    }
-
 
 }

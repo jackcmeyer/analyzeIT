@@ -6,7 +6,7 @@ import java.util.Map;
 /**
  * Created by Jack on 10/10/2016.
  */
-public class MentionModel implements Returnable {
+public class MentionModel {
 
     Map<String, Integer> userCount;
 
