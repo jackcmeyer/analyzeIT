@@ -14,11 +14,11 @@ public class HashtagModel {
         this.hashtagCount = hashtagCount;
     }
 
-    public Map<String, Integer> getUserCount() {
+    public Map<String, Integer> getHashtagCount() {
         return hashtagCount;
     }
 
-    public void setUserCount(HashMap<String, Integer> userCount) {
+    public void setHashtagCount(HashMap<String, Integer> userCount) {
         this.hashtagCount = userCount;
     }
 }

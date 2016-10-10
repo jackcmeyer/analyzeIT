@@ -29,13 +29,8 @@ import java.util.regex.Pattern;
 public class HomeController {
 
     @Autowired
-    private Twitter twitter;
-
-    @Autowired
     private ConnectionRepository connectionRepository;
 
-    @Autowired
-    private DataService dataService;
 
     /**
      * Mapping for the home page. This function will load the contents for "/"
@@ -48,50 +43,10 @@ public class HomeController {
             return "redirect:/connect/twitter";
         }
 
-
-        List<Tweet> tweets = twitter.timelineOperations().getUserTimeline("FoxNews", 200);
-
-        Map<String, Integer> mentionOccurrences = countOccurences(tweets, "@");
-        Map<String, Integer> hashtagOccurrences = countOccurences(tweets, "#");
-
-        HashtagModel hashtagModel = new HashtagModel(hashtagOccurrences);
-        MentionModel mentionModel = new MentionModel(mentionOccurrences);
-
-
-
-        System.out.println(mentionOccurrences);
-        System.out.println(hashtagOccurrences);
-
-
-
         return "index";
     }
 
 
-    /**
-     * Count the number of occurences which for words that start with a certain character. This is useful for counting
-     * the number of times a twitter user mentions another user or uses a hashtag.
-     * @param tweets the list of tweets for a given user
-     * @param delimiter the starting character to look for (eg. '#' or '@')
-     * @return occurences a HashMap which has the word as a key and the count as a
-     */
-    public Map<String, Integer> countOccurences(List<Tweet> tweets, String delimiter) {
-       Map<String, Integer> occurences =  new HashMap<String, Integer>();
-        for(Tweet tweet : tweets) {
-            String tweetText = tweet.getText();
 
-            Pattern pattern = Pattern.compile(delimiter + "\\w+");
-            Matcher matcher = pattern.matcher(tweetText);
-            while(matcher.find()) {
-                if(occurences.containsKey(matcher.group())) {
-                    occurences.put(matcher.group(), occurences.get(matcher.group()) + 1);
-                } else {
-                    occurences.put(matcher.group(), 1);
-                }
-            }
-        }
-
-        return occurences;
-    }
 
 }

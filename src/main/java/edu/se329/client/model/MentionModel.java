@@ -8,17 +8,17 @@ import java.util.Map;
  */
 public class MentionModel {
 
-    Map<String, Integer> userCount;
+    Map<String, Integer> mentionCount;
 
-    public MentionModel(Map<String, Integer> userCount) {
-        this.userCount = userCount;
+    public MentionModel(Map<String, Integer> mentionCount) {
+        this.mentionCount = mentionCount;
     }
 
-    public Map<String, Integer> getUserCount() {
-        return userCount;
+    public Map<String, Integer> getMentionCount() {
+        return mentionCount;
     }
 
-    public void setUserCount(HashMap<String, Integer> userCount) {
-        this.userCount = userCount;
+    public void setMentionCount(HashMap<String, Integer> userCount) {
+        this.mentionCount = mentionCount;
     }
 }
