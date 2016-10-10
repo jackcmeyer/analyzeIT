@@ -1,24 +1,19 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { Router, Route, IndexRoute, browserHistory, IndexRedirect} from "react-router";
+import { Router, Route, IndexRoute, hashHistory, IndexRedirect} from "react-router";
 // import $ from "jquery";
 
 
 import App from "./js/components/App";
-import Login from "./js/pages/Login";
+import Home from "./js/pages/Home";
 
 const app = document.getElementById('app');
 
-function isLoggedIn() {
-
-}
-
 ReactDOM.render(
-<Router history={browserHistory}>
+<Router history={hashHistory}>
     <Route path="/" component={App}>
-    <IndexRedirect to="/login" />
-    <Route path="login" name="login" component={Login} />
-    {/*<Route path="home" name="home" component={Home} onEnter={isLoggedIn}></Route>*/}
+    <IndexRedirect to="/home" />
+    <Route path="home" name="Home" component={Home} />
     </Route>
     </Router>,
     app);

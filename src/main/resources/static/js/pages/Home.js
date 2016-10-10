@@ -1,7 +1,7 @@
 import React from "react";
 import { PageHeader, Row, Col } from "react-bootstrap";
 
-export default class Login extends React.Component {
+export default class Home extends React.Component {
     render() {
         return (
             <div>
@@ -10,7 +10,7 @@ export default class Login extends React.Component {
                 </PageHeader>
                 <Row>
                     <Col md={6} mdOffset={3}>
-                        {/*Sign in stuff*/}
+                        Home
                     </Col>
                 </Row>
             </div>
