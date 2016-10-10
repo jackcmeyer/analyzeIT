@@ -2,7 +2,7 @@ package edu.se329.client.model;
 
 import java.util.HashMap;
 
-public class KeywordModel {
+public class KeywordModel implements Returnable{
 
     /**
      * The word that is being analyzed.

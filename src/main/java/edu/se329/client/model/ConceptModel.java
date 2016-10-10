@@ -1,6 +1,6 @@
 package edu.se329.client.model;
 
-public class ConceptModel {
+public class ConceptModel implements Returnable{
 
     /**
      * The keyword being analyzed.

@@ -2,6 +2,9 @@ package edu.se329.controller;
 
 import javax.inject.Inject;
 
+import edu.se329.client.model.HashtagModel;
+import edu.se329.client.model.MentionModel;
+import edu.se329.client.model.ReturnableModel;
 import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.social.twitter.api.CursoredList;
 import org.springframework.social.twitter.api.Tweet;
@@ -26,6 +29,7 @@ public class HomeController {
     private Twitter twitter;
 
     private ConnectionRepository connectionRepository;
+    private ReturnableModel returnableModel;
 
     @Inject
     public HomeController(Twitter twitter, ConnectionRepository connectionRepository) {
@@ -49,6 +53,12 @@ public class HomeController {
 
         Map<String, Integer> mentionOccurrences = countOccurences(tweets, "@");
         Map<String, Integer> hashtagOccurrences = countOccurences(tweets, "#");
+
+        HashtagModel hashtagModel = new HashtagModel(hashtagOccurrences);
+        MentionModel mentionModel = new MentionModel(mentionOccurrences);
+
+
+
         System.out.println(mentionOccurrences);
         System.out.println(hashtagOccurrences);
 
