@@ -22,7 +22,8 @@ public class DataController {
                                    @RequestParam(value="mentionCount") boolean mentionCount,
                                    @RequestParam(value="hashtagCount") boolean hashtagCount,
                                    @RequestParam(value="taxonomyAnalysis") boolean taxonomyAnalysis,
-                                   @RequestParam(value="emotionAnalysis") boolean emotionAnalysis) {
+                                   @RequestParam(value="emotionAnalysis") boolean emotionAnalysis,
+                                   @RequestParam(value="timeAnalysis") boolean timeAnalysis) {
         ReturnableModel returnableModel = new ReturnableModel();
 
 
@@ -45,6 +46,11 @@ public class DataController {
         if(emotionAnalysis){
             EmotionModel emotionModel = new EmotionModel(dataService.getEmotion());
             returnableModel.setEmotionModel(emotionModel);
+        }
+
+        if(timeAnalysis) {
+            TimeModel timeModel = new TimeModel(dataService.getTimeList());
+            returnableModel.setTimeModel(timeModel);
         }
 
         return returnableModel;
