@@ -4,6 +4,11 @@ import javax.inject.Inject;
 
 import edu.se329.service.AlchemyService;
 import org.springframework.beans.factory.annotation.Autowired;
+import edu.se329.client.model.HashtagModel;
+import edu.se329.client.model.MentionModel;
+import edu.se329.client.model.ReturnableModel;
+import edu.se329.service.DataService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.social.twitter.api.Tweet;
 import org.springframework.social.twitter.api.Twitter;
@@ -23,8 +28,7 @@ import java.util.regex.Pattern;
 @RequestMapping("/")
 public class HomeController {
 
-    private Twitter twitter;
-
+    @Autowired
     private ConnectionRepository connectionRepository;
 
     @Autowired
@@ -48,47 +52,10 @@ public class HomeController {
             return "redirect:/connect/twitter";
         }
 
-
-        List<Tweet> tweets = twitter.timelineOperations().getUserTimeline("FoxNews", 200);
-
-        Map<String, Integer> mentionOccurrences = countOccurences(tweets, "@");
-        Map<String, Integer> hashtagOccurrences = countOccurences(tweets, "#");
-        System.out.println(mentionOccurrences);
-        System.out.println(hashtagOccurrences);
-
-        System.out.println("----Taxonomy Analysis----\n"+alchemyService.getTaxonomy(tweets));
-        System.out.println("----Sentiment Analysis---\n"+alchemyService.getSentiment(tweets));
-        System.out.println("----Emotional Analysis---\n"+alchemyService.getEmotions(tweets));
-
-
         return "index";
     }
 
 
-    /**
-     * Count the number of occurences which for words that start with a certain character. This is useful for counting
-     * the number of times a twitter user mentions another user or uses a hashtag.
-     * @param tweets the list of tweets for a given user
-     * @param delimiter the starting character to look for (eg. '#' or '@')
-     * @return occurences a HashMap which has the word as a key and the count as a
-     */
-    public Map<String, Integer> countOccurences(List<Tweet> tweets, String delimiter) {
-       Map<String, Integer> occurences =  new HashMap<String, Integer>();
-        for(Tweet tweet : tweets) {
-            String tweetText = tweet.getText();
 
-            Pattern pattern = Pattern.compile(delimiter + "\\w+");
-            Matcher matcher = pattern.matcher(tweetText);
-            while(matcher.find()) {
-                if(occurences.containsKey(matcher.group())) {
-                    occurences.put(matcher.group(), occurences.get(matcher.group()) + 1);
-                } else {
-                    occurences.put(matcher.group(), 1);
-                }
-            }
-        }
-
-        return occurences;
-    }
 
 }
