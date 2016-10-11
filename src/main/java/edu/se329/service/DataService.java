@@ -11,6 +11,7 @@ import org.springframework.social.twitter.api.Tweet;
 import org.springframework.social.twitter.api.Twitter;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,12 +30,16 @@ public class DataService {
     private Map<String, Integer> hashtagOccurrences;
     private DocumentEmotion emotion;
     private Taxonomies taxonomy;
+    private ArrayList<String> timeList;
+
 
     public void getData(String username) {
         List<Tweet> tweets = twitter.timelineOperations().getUserTimeline(username, 200);
+        timeList = new ArrayList<>();
 
         for(Tweet tweet : tweets) {
             System.out.println(tweet.getText());
+            timeList.add(tweet.getCreatedAt().toString());
         }
         mentionOccurrences = countOccurences(tweets, "@");
         hashtagOccurrences = countOccurences(tweets, "#");
@@ -73,6 +78,30 @@ public class DataService {
 
     public void setTaxonomy(Taxonomies taxonomy) {
         this.taxonomy = taxonomy;
+    }
+
+    public Twitter getTwitter() {
+        return twitter;
+    }
+
+    public void setTwitter(Twitter twitter) {
+        this.twitter = twitter;
+    }
+
+    public AlchemyService getAlchemyService() {
+        return alchemyService;
+    }
+
+    public void setAlchemyService(AlchemyService alchemyService) {
+        this.alchemyService = alchemyService;
+    }
+
+    public ArrayList<String> getTimeList() {
+        return timeList;
+    }
+
+    public void setTimeList(ArrayList<String> timeList) {
+        this.timeList = timeList;
     }
 
     /**

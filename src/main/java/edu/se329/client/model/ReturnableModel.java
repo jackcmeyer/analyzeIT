@@ -8,6 +8,7 @@ public class ReturnableModel {
     private MentionModel mentionmodel;
     private EmotionModel emotionModel;
     private TaxonomyModel taxonomyModel;
+    private TimeModel timeModel;
 
     public ReturnableModel() {
         conceptModel = null;
@@ -16,6 +17,7 @@ public class ReturnableModel {
         mentionmodel = null;
         emotionModel = null;
         taxonomyModel = null;
+        timeModel = null;
     }
 
     public ConceptModel getConceptModel() {
@@ -64,5 +66,13 @@ public class ReturnableModel {
 
     public void setTaxonomyModel(TaxonomyModel taxonomyModel) {
         this.taxonomyModel = taxonomyModel;
+    }
+
+    public TimeModel getTimeModel() {
+        return timeModel;
+    }
+
+    public void setTimeModel(TimeModel timeModel) {
+        this.timeModel = timeModel;
     }
 }
