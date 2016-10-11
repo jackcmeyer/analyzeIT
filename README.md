@@ -5,4 +5,5 @@ A social media analysis tool.
 1. `git clone https://github.com/jackcmeyer/analyzeIT`
 2. Open project in Intellij
 3. Install all Maven dependencies
-4. Run the program
+4. Navigate to the project folder in the terminal and run `webpack`
+5. Run the program
