@@ -1,5 +1,8 @@
 package edu.se329.service;
 
+import com.ibm.watson.developer_cloud.alchemy.v1.model.DocumentEmotion;
+import com.ibm.watson.developer_cloud.alchemy.v1.model.Taxonomies;
+import com.ibm.watson.developer_cloud.service.*;
 import edu.se329.client.model.HashtagModel;
 import edu.se329.client.model.MentionModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +22,13 @@ public class DataService {
 
     @Autowired
     private Twitter twitter;
+    @Autowired
+    private AlchemyService alchemyService;
 
     private Map<String, Integer> mentionOccurrences;
     private Map<String, Integer> hashtagOccurrences;
+    private DocumentEmotion emotion;
+    private Taxonomies taxonomy;
 
     public void getData(String username) {
         List<Tweet> tweets = twitter.timelineOperations().getUserTimeline(username, 200);
@@ -29,10 +36,12 @@ public class DataService {
         for(Tweet tweet : tweets) {
             System.out.println(tweet.getText());
         }
-
         mentionOccurrences = countOccurences(tweets, "@");
         hashtagOccurrences = countOccurences(tweets, "#");
+        emotion = alchemyService.getEmotions(tweets);
+        taxonomy = alchemyService.getTaxonomy(tweets);
     }
+
 
     public Map<String, Integer> getMentionOccurrences() {
         return mentionOccurrences;
@@ -50,7 +59,21 @@ public class DataService {
         this.hashtagOccurrences = hashtagOccurrences;
     }
 
+    public DocumentEmotion getEmotion() {
+        return emotion;
+    }
 
+    public void setEmotion(DocumentEmotion emotion) {
+        this.emotion = emotion;
+    }
+
+    public Taxonomies getTaxonomy() {
+        return taxonomy;
+    }
+
+    public void setTaxonomy(Taxonomies taxonomy) {
+        this.taxonomy = taxonomy;
+    }
 
     /**
      * Count the number of occurences which for words that start with a certain character. This is useful for counting

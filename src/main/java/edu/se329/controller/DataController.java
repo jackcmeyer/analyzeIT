@@ -1,8 +1,7 @@
 package edu.se329.controller;
 
-import edu.se329.client.model.HashtagModel;
-import edu.se329.client.model.MentionModel;
-import edu.se329.client.model.ReturnableModel;
+import com.ibm.watson.developer_cloud.service.AlchemyService;
+import edu.se329.client.model.*;
 import edu.se329.service.DataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +16,6 @@ public class DataController {
 
     @Autowired
     private DataService dataService;
-
 
     @RequestMapping("api/v1/data/getData")
     public ReturnableModel getData(@RequestParam(value="username") String username,
@@ -38,6 +36,15 @@ public class DataController {
         if(hashtagCount) {
             HashtagModel hashtagModel = new HashtagModel(dataService.getHashtagOccurrences());
             returnableModel.setHashtagModel(hashtagModel);
+        }
+
+        if(taxonomyAnalysis){
+            TaxonomyModel taxonomyModel = new TaxonomyModel(dataService.getTaxonomy());
+            returnableModel.setTaxonomyModel(taxonomyModel);
+        }
+        if(emotionAnalysis){
+            EmotionModel emotionModel = new EmotionModel(dataService.getEmotion());
+            returnableModel.setEmotionModel(emotionModel);
         }
 
         return returnableModel;

@@ -10,8 +10,10 @@ import edu.se329.client.model.ReturnableModel;
 import edu.se329.service.DataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.connect.ConnectionRepository;
+import org.springframework.social.twitter.api.CursoredList;
 import org.springframework.social.twitter.api.Tweet;
 import org.springframework.social.twitter.api.Twitter;
+import org.springframework.social.twitter.api.TwitterProfile;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,13 +33,6 @@ public class HomeController {
     @Autowired
     private ConnectionRepository connectionRepository;
 
-
-    @Inject
-    public HomeController(/*Twitter twitter,*/ ConnectionRepository connectionRepository) {
-/*        this.twitter = twitter;*/
-        this.connectionRepository = connectionRepository;
-    }
-
     /**
      * Mapping for the home page. This function will load the contents for "/"
      * @param model
@@ -51,8 +46,5 @@ public class HomeController {
 
         return "index";
     }
-
-
-
 
 }
