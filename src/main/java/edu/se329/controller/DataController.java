@@ -22,7 +22,9 @@ public class DataController {
     @RequestMapping("api/v1/data/getData")
     public ReturnableModel getData(@RequestParam(value="username") String username,
                                    @RequestParam(value="mentionCount") boolean mentionCount,
-                                   @RequestParam(value="hashtagCount") boolean hashtagCount) {
+                                   @RequestParam(value="hashtagCount") boolean hashtagCount,
+                                   @RequestParam(value="taxonomyAnalysis") boolean taxonomyAnalysis,
+                                   @RequestParam(value="emotionAnalysis") boolean emotionAnalysis) {
         ReturnableModel returnableModel = new ReturnableModel();
 
 

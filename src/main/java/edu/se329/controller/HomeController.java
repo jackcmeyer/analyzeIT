@@ -31,13 +31,10 @@ public class HomeController {
     @Autowired
     private ConnectionRepository connectionRepository;
 
-    @Autowired
-    private AlchemyService alchemyService;
-
 
     @Inject
-    public HomeController(Twitter twitter, ConnectionRepository connectionRepository) {
-        this.twitter = twitter;
+    public HomeController(/*Twitter twitter,*/ ConnectionRepository connectionRepository) {
+/*        this.twitter = twitter;*/
         this.connectionRepository = connectionRepository;
     }
 
