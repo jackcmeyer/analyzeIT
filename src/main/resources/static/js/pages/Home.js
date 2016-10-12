@@ -1,5 +1,5 @@
 import React from "react";
-import { BarChart } from "react-d3-components";
+import { BarChart, PieChart } from "react-d3-components";
 import { PageHeader, Row, Col, FormGroup, FormControl, ControlLabel, Checkbox, Button } from "react-bootstrap";
 import $ from "jquery";
 
@@ -60,9 +60,14 @@ export default class Home extends React.Component {
         var barGraph;
         var timeChart;
         var hashChart;
+        var emotionChart;
         var tooltip = function(x, y0, y) {
             return y.toString();
         };
+        var tooltipPie = function(x, y) {
+            return y.toString();
+        };
+
         if (this.state.data.mentionmodel) {
             var mentionCount = this.state.data.mentionmodel.mentionCount;
             var mentionValues = [];
@@ -165,6 +170,32 @@ export default class Home extends React.Component {
             hashChart = null;
         }
 
+        if(this.state.data.emotionModel) {
+            var emotionCount = this.state.data.emotionModel.emotionAnalysis.emotion;
+            var emotionValues = [];
+
+            for (var key in emotionCount) {
+                emotionValues.push({x: key, y: emotionCount[key]});
+            }
+
+            var sort = null;
+
+            emotionChart = <PieChart
+                data={{
+                    label: 'Emotions',
+                    values: emotionValues
+                }}
+                width={600}
+                height={400}
+                margin={{top: 50, bottom: 50, left: 50, right: 10}}
+                sort={sort}
+                tooltipHtml={tooltipPie}
+            />;
+        }
+        else {
+            emotionChart = null;
+        }
+
         return (
             <div>
                 <PageHeader>
@@ -205,6 +236,7 @@ export default class Home extends React.Component {
                 {barGraph}
                 {timeChart}
                 {hashChart}
+                {emotionChart}
             </div>
         );
     }
