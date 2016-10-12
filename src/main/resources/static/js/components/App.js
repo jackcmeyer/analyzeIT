@@ -8,12 +8,6 @@ export default class App extends React.Component {
     }
 
     render() {
-        // const childrenWithProps = React.Children.map(this.props.children,
-        //     (child) => React.cloneElement(child, {
-        //         user: this.user
-        //     })
-        // );
-
         return (
             <Row>
                 <Col md={6} mdOffset={3}>
