@@ -61,6 +61,8 @@ export default class Home extends React.Component {
         var timeChart;
         var hashChart;
         var emotionChart;
+        var taxonomyChart;
+        var sort = null;
         var tooltip = function(x, y0, y) {
             return y.toString();
         };
@@ -135,8 +137,8 @@ export default class Home extends React.Component {
             timeChart = null;
         }
 
-        if(this.state.data.hashTagModel) {
-            var hashTagCount = this.state.data.hashTagModel.hashtagCount;
+        if(this.state.data.hashtagModel) {
+            var hashTagCount = this.state.data.hashtagModel.hashtagCount;
             var hashTagValues = [];
 
             for (var key in hashTagCount) {
@@ -178,8 +180,6 @@ export default class Home extends React.Component {
                 emotionValues.push({x: key, y: emotionCount[key]});
             }
 
-            var sort = null;
-
             emotionChart = <PieChart
                 data={{
                     label: 'Emotions',
@@ -187,13 +187,38 @@ export default class Home extends React.Component {
                 }}
                 width={600}
                 height={400}
-                margin={{top: 50, bottom: 50, left: 50, right: 10}}
+                margin={{top: 50, bottom: 50, left: 100, right: 10}}
                 sort={sort}
                 tooltipHtml={tooltipPie}
             />;
         }
         else {
             emotionChart = null;
+        }
+
+        if(this.state.data.taxonomyModel) {
+            var taxonomyCount = this.state.data.taxonomyModel.taxonomyAnalysis.taxonomy;
+            var taxonomyValues = [];
+
+            taxonomyCount.forEach(function(taxonomy) {
+                taxonomyValues.push({x: taxonomy.label, y: taxonomy.score});
+            });
+
+
+            taxonomyChart = <PieChart
+                data={{
+                    label: 'Taxonomy',
+                    values: taxonomyValues
+                }}
+                width={600}
+                height={400}
+                margin={{top: 50, bottom: 50, left: 100, right: 10}}
+                sort={sort}
+                tooltipHtml={tooltipPie}
+            />;
+        }
+        else {
+            taxonomyChart = null;
         }
 
         return (
@@ -232,11 +257,11 @@ export default class Home extends React.Component {
                         AnalyzeIT
                     </Button>
                 </form>
-
                 {barGraph}
                 {timeChart}
-                {hashChart}
                 {emotionChart}
+                {hashChart}
+                {taxonomyChart}
             </div>
         );
     }
